@@ -2,10 +2,12 @@ package com.yubo.practicaapiyswagger.service;
 
 import com.yubo.practicaapiyswagger.entities.Hotel;
 import com.yubo.practicaapiyswagger.repository.HotelRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class HotelServices {
     private final HotelRepository hotelRepository;
 

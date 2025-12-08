@@ -24,7 +24,7 @@ public class HotelController {
     public List<Hotel> getAllHotels() {
 
         try {
-            return HotelServices.();
+            return hotelServices.findAllHotal();
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error al obtener todos los hoteles", e);
         }
