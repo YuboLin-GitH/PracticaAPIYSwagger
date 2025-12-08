@@ -44,7 +44,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!--No hacer falta escribir get set con este dependencia-->
+        <!--No hacer falta escribir get set con esta dependencia-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
