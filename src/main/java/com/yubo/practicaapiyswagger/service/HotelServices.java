@@ -22,5 +22,16 @@ public class HotelServices {
         return hotelRepository.findAll();
     }
 
+    public Optional<Hotel> findHotelByLocal(String localidad) {
+        return Optional.ofNullable((Hotel) hotelRepository.findHotelByLocal(localidad));
+    }
+
+    public Optional<Hotel> findHotelByCategoria(int categoria) {
+        return Optional.ofNullable((Hotel) hotelRepository.findHotelByCategoria(categoria));
+    }
+
+
+
+
 
 }
