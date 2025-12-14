@@ -4,10 +4,7 @@ import com.yubo.practicaapiyswagger.entities.Hotel;
 import com.yubo.practicaapiyswagger.service.HotelServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -37,17 +34,42 @@ public class HotelController {
 
 
     @GetMapping("/localidad/{localidad}")
-
+    // http://localhost:9999/api/hotel/localidad/Madrid
     public ResponseEntity<?> getLocalidad(@PathVariable String localidad) {
+        try{
+            List<Hotel> hotels = hotelServices.findHotelByLocal(localidad);
 
-        return ResponseEntity.of(hotelServices.findHotelByLocal(localidad));
+            if (hotels.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(hotels);
+        } catch (Exception e){
+            // SI FALLA
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Error buscar hotel por localidad: ", e);
+        }
     }
+
+
     @GetMapping("/categoria/{categoria}")
-    // http://localhost:9999/api/hotel/1
+    // http://localhost:9999/api/hotel/categoria/5
     public ResponseEntity<?> getCategoria(@PathVariable int categoria) {
+        try{
+            List<Hotel> hotels = hotelServices.findHotelByCategoria(categoria);
 
-        return ResponseEntity.of(hotelServices.findHotelByCategoria(categoria));
+            if (hotels.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+
+            return ResponseEntity.ok(hotels);
+        } catch (Exception e){
+            // SI FALLA
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Error buscar hotel por categoria: ", e);
+        }
     }
+
+
 
 
 

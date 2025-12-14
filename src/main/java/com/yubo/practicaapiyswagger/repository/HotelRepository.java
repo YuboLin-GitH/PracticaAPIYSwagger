@@ -13,10 +13,10 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 
 
     @Query("SELECT h FROM Hotel h WHERE h.localidad = :localidad")
-    List<Hotel> findHotelByLocal(String localidad);
+    List<Hotel> findByLocalidad(String localidad);
 
     @Query("SELECT h FROM Hotel h WHERE h.categoria = :categoria")
-    List<Hotel> findHotelByCategoria(int categoria);
+    List<Hotel> findByCategoria(int categoria);
 
 
 
