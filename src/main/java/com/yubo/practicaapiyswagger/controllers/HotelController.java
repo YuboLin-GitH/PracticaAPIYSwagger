@@ -70,6 +70,31 @@ public class HotelController {
     }
 
 
+    // c.     Registrar un nuevo hotel
+    @PostMapping("save")
+    /*
+    POST   http://localhost:9999/api/hotel/save
+    {
+    "nombre": "Hotel Valencia Center",
+    "descripcion": "Un hotel moderno cerca del arte",
+    "categoria": 4,
+    "piscina": true,
+    "localidad": "Valencia"
+    }
+
+
+    */
+    public ResponseEntity<?> createHotel(@RequestBody Hotel hotel) {
+        try {
+            // se vuelve datos que has creado
+            Hotel hotelGuardado = hotelServices.saveHotel(hotel);
+            //  CREADO (si se guardó correctamente)
+            return new ResponseEntity<>(hotelGuardado, HttpStatus.CREATED);
+        } catch (Exception e) {
+            // SI HAY UN ERROR AL GUARDAR EL HOTEL, SE DEVUELVE UN MENSAJE DE ERROR
+            return new ResponseEntity<>("Error al guardar el hotel: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 

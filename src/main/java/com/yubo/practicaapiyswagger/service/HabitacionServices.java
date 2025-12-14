@@ -26,4 +26,35 @@ public class HabitacionServices {
         return habitacionRepository.findAllHabitacionLibre(idhotel, tamanoMin, tamanoMax, precioMin, precioMax);
     }
 
+
+    // void
+    public void deleteHabitacionById(int idhabitacion) {
+        if (!habitacionRepository.existsById(idhabitacion)) {
+            throw new RuntimeException("La habitación con id " + idhabitacion + " no existe.");
+        }
+        habitacionRepository.deleteById(idhabitacion);
+    }
+
+
+    // Habitacion
+    // forma norma para ocupar una habitacion
+    public Habitacion updateHabitacion(Habitacion habitacion) {
+        return habitacionRepository.save(habitacion);
+    }
+
+
+    // fomrma mejor para ocupar una habitacion
+    public void ocuparHabitacion(int idhabitacion) throws Exception {
+        Habitacion habitacion = habitacionRepository.findById(idhabitacion)
+                .orElseThrow(() -> new RuntimeException("Habitación no encontrada"));
+
+        if (Boolean.TRUE.equals(habitacion.getOcupada())) {
+
+            throw new Exception("La habitación ya está ocupada ");
+        }
+
+
+        habitacion.setOcupada(true);
+        habitacionRepository.save(habitacion);
+    }
 }
